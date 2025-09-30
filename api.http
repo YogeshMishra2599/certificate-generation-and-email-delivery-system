@@ -1,0 +1,158 @@
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### Health Check
+GET {{baseUrl}}/health
+
+### Root Endpoint
+GET {{baseUrl}}/
+
+###############################################
+### VALID REQUESTS
+###############################################
+
+### Generate Certificate - Example 1 (Maharashtra)
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "gstNumber": "27ABCDE1234F1Z5",
+  "businessName": "Example Business Ltd",
+  "businessAddress": "123 Main Street, Andheri West, Mumbai, Maharashtra 400058"
+}
+
+### Generate Certificate - Example 2 (Karnataka)
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Rajesh Kumar",
+  "email": "rajesh.kumar@techsolutions.in",
+  "gstNumber": "29AAACH7409R1ZX",
+  "businessName": "Tech Solutions Private Limited",
+  "businessAddress": "Floor 3, Tower A, DLF Cyber City, Sector 25, Gurugram, Haryana 122002"
+}
+
+
+###############################################
+### VALIDATION ERROR TESTS
+###############################################
+
+### Test 1: Missing Fields
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+
+### Test 2: Invalid Email Format
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Jane Smith",
+  "email": "invalid-email-format",
+  "gstNumber": "27ABCDE1234F1Z5",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Test Address with sufficient length for validation"
+}
+
+### Test 3: Invalid GST Number Format
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Invalid GST Test",
+  "email": "test@example.com",
+  "gstNumber": "INVALID_GST_123",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Test Address with sufficient length for validation"
+}
+
+### Test 4: Name Too Short
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "A",
+  "email": "test@example.com",
+  "gstNumber": "27ABCDE1234F1Z5",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Test Address with sufficient length for validation"
+}
+
+### Test 5: Business Address Too Short
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Short Address Test",
+  "email": "test@example.com",
+  "gstNumber": "27ABCDE1234F1Z5",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Short"
+}
+
+### Test 6: Invalid Email - Missing @ Symbol
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Missing At Symbol",
+  "email": "testexample.com",
+  "gstNumber": "27ABCDE1234F1Z5",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Complete business address with proper length"
+}
+
+### Test 7: Invalid Email - Multiple @ Symbols
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Multiple At Test",
+  "email": "test@@example.com",
+  "gstNumber": "27ABCDE1234F1Z5",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Complete business address with proper length"
+}
+
+### Test 8: Wrong GST Format - Lowercase
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Lowercase GST Test",
+  "email": "test@example.com",
+  "gstNumber": "27abcde1234f1z5",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Complete business address with proper length"
+}
+
+### Test 9: Wrong GST Length
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": "Wrong GST Length",
+  "email": "test@example.com",
+  "gstNumber": "27ABCDE1234F1Z",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Complete business address with proper length"
+}
+
+### Test 10: Non-string Data Types
+POST {{baseUrl}}/api/certificate/generate
+Content-Type: {{contentType}}
+
+{
+  "name": 12345,
+  "email": "test@example.com",
+  "gstNumber": "27ABCDE1234F1Z5",
+  "businessName": "Test Company Pvt Ltd",
+  "businessAddress": "Complete business address with proper length"
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        .certificate {
+            background: white;
+            padding: 80px 100px;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid #d0d0d0;
+            pointer-events: none;
+        }
+
+        .header {
+            margin-bottom: 50px;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        .content {
+            margin: 40px 0;
+        }
+
+        .field {
+            margin: 20px 0;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .field:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-align: left;
+            flex: 0 0 180px;
+        }
+
+        .value {
+            color: #2c3e50;
+            font-size: 16px;
+            text-align: left;
+            flex: 1;
+            font-weight: 400;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #2c3e50;
+            color: #999;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="certificate">
+        <div class="header">
+            <h1>Certificate of Achievement</h1>
+            <p class="subtitle">This is to certify that the following details have been verified</p>
+        </div>
+
+        <div class="content">
+            <div class="field">
+                <span class="label">Name</span>
+                <span class="value">{{NAME}}</span>
+            </div>
+            <div class="field">
+                <span class="label">Email Address</span>
+                <span class="value">{{EMAIL}}</span>
+            </div>
+            <div class="field">
+                <span class="label">GST Number</span>
+                <span class="value">{{GST_NUMBER}}</span>
+            </div>
+            <div class="field">
+                <span class="label">Business Name</span>
+                <span class="value">{{BUSINESS_NAME}}</span>
+            </div>
+            <div class="field">
+                <span class="label">Business Address</span>
+                <span class="value">{{BUSINESS_ADDRESS}}</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            HamBOLDS PVT LTD
+        </div>
+    </div>
+</body>
+
+</html>

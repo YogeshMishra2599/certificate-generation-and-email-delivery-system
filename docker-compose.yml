@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  certificate-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: certificate-system
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+    env_file:
+      - .env
+    volumes:
+      - ./output:/app/output
+    restart: unless-stopped
